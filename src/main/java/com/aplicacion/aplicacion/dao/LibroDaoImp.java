@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -30,14 +29,15 @@ public class LibroDaoImp implements LibroDao {
     }
 
    @Override
-    public List<Libro> getLibrosPorUsuario(Integer idUsuario) {
-        String query = "SELECT DISTINCT libros.id FROM libros LEFT JOIN libros_usuarios ON libros_usuarios.id_libro = libros.id WHERE libros_usuarios.id_usuario = :nombre";
+    public List<Integer> getLibrosPorUsuario(Integer idUsuario) {
+        /*String query = "SELECT DISTINCT libros.id FROM libros LEFT JOIN libros_usuarios ON libros_usuarios.id_libro = libros.id WHERE libros_usuarios.id_usuario = :nombre";*/
+       String query = "SELECT DISTINCT id_libros FORM LibroUsuario WHERE id_usuarios = :nombre";
         return entityManager.createQuery(query)
                 .setParameter("nombre", idUsuario)
                 .getResultList();
     }
 
-    /*@Override
+    @Override
      public List<Integer> getUsuariosPorLibro(Integer idLibro) {
         String query = "SELECT DISTINCT u " +
                 "FROM usuarios u LEFT JOIN libros_usuarios lu " +
@@ -48,7 +48,7 @@ public class LibroDaoImp implements LibroDao {
                 .getResultList();
 
         return null;
-    }*/
+    }
 
     @Override
     public void eliminar(Integer id) {

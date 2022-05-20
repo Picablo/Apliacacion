@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "libros")
@@ -87,7 +86,7 @@ public class Libro {
    /* @OneToMany(mappedBy = "id_libro", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Getter @Setter
     private List<LibroUsuario> libroUsuarios;*/
-    @ManyToMany(cascade = {
+    /*@ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
@@ -97,7 +96,7 @@ public class Libro {
             inverseJoinColumns = {@JoinColumn(name = "id_usaurio")}
     )
     @Getter @Setter
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios;*/
 }
 
 

@@ -8,7 +8,6 @@ import de.mkammerer.argon2.Argon2Factory;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,14 +32,14 @@ public class LibroController {
     }
 
     @RequestMapping(value = "api/libros/librosusuario/{id}", method = RequestMethod.GET)
-    public List<Libro> getLibrosPorUsuario(@PathVariable Integer id){
+    public List<Integer> getLibrosPorUsuario(@PathVariable Integer id){
         return libroDao.getLibrosPorUsuario(id);
     }
 
-    /*@RequestMapping(value = "api/libros/usuarioslibro/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "api/libros/usuarioslibro/{id}", method = RequestMethod.GET)
     public List<Integer> getUsuariosPorLibro(@PathVariable Integer id){
         return libroDao.getUsuariosPorLibro(id);
-    }*/
+    }
 
     @RequestMapping(value = "api/libros", method = RequestMethod.GET)
     public List<Libro> getLibros(@RequestHeader(value = "Authorization") String token) {

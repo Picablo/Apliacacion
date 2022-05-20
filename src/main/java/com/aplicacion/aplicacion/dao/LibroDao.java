@@ -9,9 +9,9 @@ public interface LibroDao {
 
     List<Libro> getLibros();
 
-    List<Libro> getLibrosPorUsuario(Integer id);
+    List<Integer> getLibrosPorUsuario(Integer id);
 
-    /*List<Integer> getUsuariosPorLibro(Integer id);*/
+    List<Integer> getUsuariosPorLibro(Integer id);
 
     void eliminar(Integer id);
 
