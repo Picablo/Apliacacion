@@ -1,0 +1,15 @@
+/*<--Cambiar Color Cabecera-->*/
+.bg-white {
+    background-color: #93b8eb!important;
+}
+
+/* Cambiar Footer */
+footer.sticky-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* margin-top: 60%; */
+    padding: 2rem 0;
+    /* flex-shrink: 0; */
+    /* background-color: #eaecf4!important; */
+}
