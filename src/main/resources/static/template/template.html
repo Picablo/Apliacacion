@@ -114,6 +114,11 @@
             </div>
 
             <!-- Sidebar Message -->
+            <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+            </div>
 
         </ul>
         </div>
@@ -187,60 +192,27 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Listado de Libros</h1>
-                    <p class="mb-4">Listado de Libros en el Sistema</a>.</p>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Listado de Libros</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="libros" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th>Nombre</th>
-                                        <th>Categoria</th>
-                                        <th>Seccion</th>
-                                        <th>Autor</th>
-                                        <th>Tamaño</th>
-                                        <th>Fecha</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    AQUI VA MI WEB
 
                 </div>
-
-
-
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
-
-            <footer class="sticky-footer bg-white">
+            <div th:fragment="Footer">
+                <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Campus Cámara 2022</span>
                     </div>
                 </div>
             </footer>
-    </div>
+            </div>
             <!-- End of Footer -->
 
-
+        </div>
         <!-- End of Content Wrapper -->
 
     </div>
@@ -283,12 +255,7 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts
-    <script src="js/demo/datatables-demo.js"></script>-->
-    <script src="js/libros.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
 </body>
 

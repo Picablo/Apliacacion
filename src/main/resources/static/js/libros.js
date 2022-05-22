@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
     cargarLibros();
-  $('#libros').DataTable();
+  //$('#libros').DataTable();
 });
 
 function getHeaders(){
@@ -31,14 +31,13 @@ async function cargarLibros(){
             libro.fecha = libro.fecha.substr(0,10);
         }
 
-        let libroHtml = '<tr><td>'+libro.tipo+'</td><td data-toggle="tooltip" data-placement="top" title="'+libro.descripcion+'">'+libro.nombre+'</td><td>'+libro.categoria+'</td><td>'+libro.seccion+'</td><td>'+libro.autor+'</td><td>tamaño</td><td>'+libro.fecha+'</td></tr>'
+        let libroHtml = '<tr><td>'+libro.tipo+'</td><td data-toggle="tooltip" data-placement="top" title="'+libro.descripcion+'">'+libro.nombre+'</td><td>'+libro.categoria+'</td><td>'+libro.seccion+'</td><td>'+libro.autor+'</td><td>'+libro.tamano+'</td><td>'+libro.fecha+'</td></tr>'
         listadoHtml += libroHtml;
     }
 
-    console.log(libros);
-
-
     document.querySelector('#libros tbody').outerHTML = listadoHtml;
+
+    $('#libros').DataTable();
 
 }
 

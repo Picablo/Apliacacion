@@ -102,23 +102,18 @@ public class LibroDaoImp implements LibroDao {
                     .setParameter("idLibro", parseInt(libroId))
                     .executeUpdate();
         }
-        //Convertimos los usuarios string a array de int
+        //Convertimos los id de usuarios que puden ver el libro de string a array string
         String[] separatedStrings = usuarioId.replaceAll("\\[", "")
-                .replaceAll("]", "").split(",");
-
-        int[] intUsarioId = new int[separatedStrings.length];
-
-        //Cargamos el libro para los usuarios puedan verlo
-        for(int i=0; i<intUsarioId.length; i++) {
-            System.out.println(i);
-        }
+                .replaceAll("]","")
+                .replaceAll(" ","")
+                .split(",");
 
         //Actualizamos la base de datos con los usuarios que pueden ver el libro
-        for(int i=0; i<intUsarioId.length; i++){
+        for(int i=0; i<separatedStrings.length; i++){
             String sql = "INSERT INTO libros_usuarios VALUES(?,?)";
             entityManager.createNativeQuery(sql)
                     .setParameter(1, libroId)
-                    .setParameter(2, i)
+                    .setParameter(2, parseInt(separatedStrings[i]))
                     .executeUpdate();
         }
     }

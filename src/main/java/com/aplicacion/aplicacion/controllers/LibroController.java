@@ -50,15 +50,6 @@ public class LibroController {
 
     @RequestMapping(value = "api/libros", method = RequestMethod.POST)
     public void registrarLibros(@RequestBody Map<String, Object> libro){
-        //BORRAR!!!!
-        System.out.println(libro);
-        System.out.println(libro);
-        String hola = libro.get("usuarioId").toString();
-        System.out.println(hola);
-        System.out.println(libro.get("usuarioId").toString());
-        //usuarioId
-
-
 
         Libro cLibro = libroDao.parseRequestBodyLibro(libro);
         libroDao.registrar(cLibro);
@@ -73,18 +64,6 @@ public class LibroController {
         Libro cLibro = libroDao.parseRequestBodyLibro(libro);
         Libro libroActual = libroDao.obtenerLibroPorId(id);
 
-        //System.out.println(libro.get("tipo").toString());
-        System.out.println(libro.get("nombre").toString());
-        System.out.println(libro.get("descripcion").toString());
-        /*Date fecha = new Date();
-        cLibro.setFecha(fecha);*/
-        System.out.println(libro.get("autor").toString());
-        System.out.println(libro.get("categoria").toString());
-        System.out.println(libro.get("seccion").toString());
-        System.out.println(libro.get("tamaño").toString());
-        System.out.println(libro.get("ruta").toString());
-        System.out.println(libro.get("isbn").toString());
-        //System.out.println(libro.get("creador").toString());
 
         libroActual.setTipo(cLibro.getTipo());
         libroActual.setNombre(cLibro.getNombre());

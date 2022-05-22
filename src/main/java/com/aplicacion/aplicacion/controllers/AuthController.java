@@ -6,8 +6,6 @@ import com.aplicacion.aplicacion.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @RestController
 public class AuthController {
 
@@ -28,7 +26,8 @@ public class AuthController {
 
             System.out.println(jwtUtil.getKey(String.valueOf(tokenJwt)));
             return tokenJwt;
-        }return "FAIL";
+        }
+        return "FAIL";
     }
 
     @RequestMapping(value = "api/jwt/{token}", method = RequestMethod.POST)
