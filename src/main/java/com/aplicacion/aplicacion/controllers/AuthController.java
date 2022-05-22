@@ -4,10 +4,9 @@ import com.aplicacion.aplicacion.dao.UsuarioDao;
 import com.aplicacion.aplicacion.models.Usuario;
 import com.aplicacion.aplicacion.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 public class AuthController {
@@ -19,15 +18,21 @@ public class AuthController {
     private JWTUtil jwtUtil;
 
 
-    @RequestMapping(value = "api/login", method = RequestMethod.POST)
+    @RequestMapping(value = "api/jwt/login", method = RequestMethod.POST)
     public String login(@RequestBody Usuario usuario){
 
         Usuario usuarioLogeado = usuarioDao.obtenerUsuarioPorCredenciales(usuario);
 
         if(usuarioLogeado != null){
-            String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogeado.getId()), usuarioLogeado.getMail());
+            String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogeado.getId()), "TOKEN");
+
+            System.out.println(jwtUtil.getKey(String.valueOf(tokenJwt)));
             return tokenJwt;
         }return "FAIL";
+    }
 
+    @RequestMapping(value = "api/jwt/{token}", method = RequestMethod.POST)
+    public String id(@PathVariable String token){
+        return jwtUtil.getKey(token);
     }
 }

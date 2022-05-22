@@ -55,14 +55,14 @@ public class UsuarioController {
 
     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
     public void eliminar(@RequestHeader(value = "Authorization") String token,
-                         @PathVariable Long id) {
+                         @PathVariable Integer id) {
         if (!validarToken(token)) { return;}
         usuarioDao.eliminar(id);;
     }
 
-    /*@RequestMapping(value = "api/usuarios/usuid", method = RequestMethod.GET)
-    public List<LibroIdUsuarioNom> getUsuarioID() {
-        return usuarioDao.getUsuarioID();
-    }*/
-
+    //Esta repe porque no es mas que un /api/usuarios
+    @RequestMapping(value = "api/usuarios/usuid", method = RequestMethod.GET)
+    public List<Usuario> getUsuarioId() {
+        return usuarioDao.getUsuarios();
+    }
 }

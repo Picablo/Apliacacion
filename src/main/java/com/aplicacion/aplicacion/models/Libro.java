@@ -79,24 +79,6 @@ public class Libro {
     @Setter
     @Column(name = "creador")
     private Integer creador;
-
-    /*@OneToMany(mappedBy = "libro")
-    @Getter @Setter
-    private List<LibroUsuario> libroUsuarios;*/
-   /* @OneToMany(mappedBy = "id_libro", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Getter @Setter
-    private List<LibroUsuario> libroUsuarios;*/
-    /*@ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(
-            name = "libros_usuariose",
-            joinColumns = {@JoinColumn(name = "id_libro")},
-            inverseJoinColumns = {@JoinColumn(name = "id_usaurio")}
-    )
-    @Getter @Setter
-    private List<Usuario> usuarios;*/
 }
 
 

@@ -10,7 +10,7 @@ async function iniciarSesion(){
     datos.password = document.getElementById("txtPassword").value
 
 
-    const request = await fetch('api/login', {
+    const request = await fetch('api/jwt/login', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -21,7 +21,6 @@ async function iniciarSesion(){
     const respuesta = await request.text();
     if (respuesta != 'FAIL'){
         localStorage.token = respuesta;
-        localStorage.email = datos.mail;
         window.location.href = 'usuarios.html'
     }else{
         alert("Las credenciales son incorrectas. Por favor intente nuevamente");

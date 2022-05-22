@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -31,6 +31,7 @@
 </head>
 
 <body id="page-top">
+<div th:include="../template.html::header"></div>
     <div class="drop-area">
         <h2>Arrastra y suelta Ficheros</h2>
         <span>o</span>
@@ -96,7 +97,7 @@
         </div>
         <div>
             <div class="">
-                <select name="select" class="" id="txtUserId" multiple onclick="cambiaPermisos()">
+                <select name="select" class="" id="txtUserId" multiple><!-- onclick="cambiaPermisos()">-->
                 </select>
             </div>
 
@@ -107,6 +108,7 @@
 
     </form>
 
+<div th:include="template.html::footer"></div>
 
 
 

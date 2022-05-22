@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Transactional
@@ -21,12 +22,19 @@ public class UsaurioDaoImp implements UsuarioDao{
     public List<Usuario> getUsuarios() {
         String query = "FROM Usuario";
         return entityManager.createQuery(query).getResultList();
+
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void eliminar(Integer id) {
+        //Borra el usuario seleccionado
         Usuario usuario = entityManager.find(Usuario.class, id);
         entityManager.remove(usuario);
+        //Borra todos los libros usuario que tuviera permiso de visualizar
+        String sql = "DELETE FROM LibroUsuario WHERE id_usuario = :idLibro";
+        entityManager.createQuery(sql)
+                .setParameter("idLibro", id)
+                .executeUpdate();
     }
 
     @Override
@@ -59,10 +67,11 @@ public class UsaurioDaoImp implements UsuarioDao{
         return null;
     }
 
-    //Reacer sin el parse!!!
-    /*@Override
-    public List<LibroIdUsuarioNom> getUsuarioID(){
-        String query = "SELECT id,nombre FROM Usuario";
+
+    @Override
+    public List<Usuario> getUsuarioId(){
+        String query = "SELECT id,nombre,tipo FROM Usuario";
         return entityManager.createQuery(query).getResultList();
-    }*/
+
+    }
 }

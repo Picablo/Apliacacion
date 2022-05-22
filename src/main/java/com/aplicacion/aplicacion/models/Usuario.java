@@ -35,8 +35,4 @@ public class Usuario {
 
     @Getter @Setter @Column(name = "tipo_usuario")
     private int tipo;
-
-    /*@ManyToMany(mappedBy = "libros")
-    @Getter @Setter
-    private List<Libro> libros;*/
 }

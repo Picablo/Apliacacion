@@ -8,7 +8,7 @@ public interface UsuarioDao {
 
     List<Usuario> getUsuarios();
 
-    void eliminar(Long id);
+    void eliminar(Integer id);
 
     void registrar(Usuario usuario);
 
@@ -16,5 +16,5 @@ public interface UsuarioDao {
 
     Usuario obtenerUsuarioPorCredenciales(Usuario usuario);
 
-    //List<LibroIdUsuarioNom> getUsuarioID();
+    List<Usuario> getUsuarioId();
 }

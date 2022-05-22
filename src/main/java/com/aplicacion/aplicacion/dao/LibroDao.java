@@ -19,6 +19,8 @@ public interface LibroDao {
 
     void modificar(Libro libro);
 
+    void insertarLibroUsuario(Map<String, Object> libro);
+
     Libro obtenerLibroPorCredenciales(Libro libro);
 
     Libro obtenerLibroPorId(Integer id);

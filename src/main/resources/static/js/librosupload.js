@@ -17,7 +17,7 @@ let fichero;
 let autores;
 let secciones;
 let categorias;
-let cambio = false;
+let cambio = true;
 let comprobacion;
 //let ficheroFinal;
 
@@ -148,6 +148,7 @@ async function uploadFile(file){
 
 async function registrarLibro(){
 
+    datos.libroId = sessionStorage.getItem('libro');
     datos.tipo = document.getElementById("txtTipo").value;
     datos.nombre = document.getElementById("txtNombre").value;
     datos.descripcion = document.getElementById("txtDescripcion").value;
@@ -160,6 +161,15 @@ async function registrarLibro(){
     datos.ruta = document.getElementById("txtRuta").value;
     datos.isbn = document.getElementById("txtIsbn").value;
     //libro.creador = document.getElementById("txtCreador").value;
+    var selected = [];
+    for (var option of document.getElementById("txtUserId").options)
+    {
+        if (option.selected) {
+            selected.push(option.value);
+        }
+
+    }
+    datos.usuarioId=selected;
 
     comprobarDatos();
     if(comprobacion){
@@ -196,7 +206,7 @@ async function comprobarLibro(){
     //Si el libro es editado trae los datos
     if(sessionStorage.getItem('libro')!=null){
 
-        request = await fetch('api/libros/'+JSON.parse(window.sessionStorage.getItem('libro')).id, {
+        request = await fetch('api/libros/'+window.sessionStorage.getItem('libro'), {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -270,7 +280,7 @@ async function dataList(){
 }
 
 async function tableUserAccess(){
-    request = await fetch('api/usuarios/usuid', {
+    usuarios = await fetch('api/usuarios/usuid', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -278,12 +288,12 @@ async function tableUserAccess(){
         },
     });
 
-    userID = await request.json();
+    userID = await usuarios.json();
     console.log(userID);
     console.log(userID.length);
     console.log(userID[0][0]);
-    for (var i = 0; i < userID.length; i++) {
-        $('#txtUserId').append("<option value='" + userID[i][0] + "'>"+userID[i][1]+"</option>");
+    for (let usuario of userID) {
+        $('#txtUserId').append("<option value="+ usuario.id+">"+usuario.nombre+" "+usuario.apellido+"</option>");
     }
 }
 
@@ -342,6 +352,10 @@ async function comprobarDatos(){
         errores = errores + "ISBN (Es un numero entre 0 y 9999999999999)\n"
     }
     //libro.creador = document.getElementById("txtCreador").value;
+    if(datos.usuarioId == ""){
+        comprobacion= false;
+        errores = errores + "Debe seleccionar al menos un usuario de accedeso al libro";
+    }
 
     if(!comprobacion){alert(errores);}
 }

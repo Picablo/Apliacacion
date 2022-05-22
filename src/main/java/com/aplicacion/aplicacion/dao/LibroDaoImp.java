@@ -3,14 +3,14 @@ package com.aplicacion.aplicacion.dao;
 import com.aplicacion.aplicacion.models.Libro;
 //import de.mkammerer.argon2.Argon2;
 //import de.mkammerer.argon2.Argon2Factory;
+import com.aplicacion.aplicacion.models.LibroUsuario;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import javax.persistence.Query;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
@@ -30,19 +30,18 @@ public class LibroDaoImp implements LibroDao {
 
    @Override
     public List<Integer> getLibrosPorUsuario(Integer idUsuario) {
-        /*String query = "SELECT DISTINCT libros.id FROM libros LEFT JOIN libros_usuarios ON libros_usuarios.id_libro = libros.id WHERE libros_usuarios.id_usuario = :nombre";*/
-       String query = "SELECT DISTINCT id_libros FORM LibroUsuario WHERE id_usuarios = :nombre";
-        return entityManager.createQuery(query)
-                .setParameter("nombre", idUsuario)
-                .getResultList();
+       String query = "SELECT id FROM Libro ORDER BY id DESC";
+       //String query = "SELECT DISTINCT id_libro FROM LibroUsuario WHERE id_usuario = :id";
+       return entityManager.createQuery(query)
+               //.setParameter("id",idUsuario)
+               .getResultList();
+
+
     }
 
     @Override
      public List<Integer> getUsuariosPorLibro(Integer idLibro) {
-        String query = "SELECT DISTINCT u " +
-                "FROM usuarios u LEFT JOIN libros_usuarios lu " +
-                "ON lu.id_usuario = u.id " +
-                "WHERE lu.id_libro = :id";
+        String query = "SELECT DISTINCT id_usuario FROM LibroUsuario WHERE id_usuario = :id";
         entityManager.createQuery(query)
                 .setParameter("id",idLibro)
                 .getResultList();
@@ -52,18 +51,76 @@ public class LibroDaoImp implements LibroDao {
 
     @Override
     public void eliminar(Integer id) {
+        //borra el libro seleccionado
         Libro libro = entityManager.find(Libro.class, id);
         entityManager.remove(libro);
+        //Borra todos los libros_usuarios que hay asociados a ese libro
+        String sql = "DELETE FROM LibroUsuario WHERE id_libro = :idLibro";
+        entityManager.createQuery(sql)
+                .setParameter("idLibro", id)
+                .executeUpdate();
     }
 
     @Override
     public void registrar(Libro libro) {
         entityManager.merge(libro);
+        //Devuelve el Id del ultimo libro
+        String sql = "SELECT id FROM Libro ORDER BY id DESC";
+        Query query = entityManager.createQuery(sql);
+        String id = String.valueOf(query.setMaxResults(1).getResultList());
+
     }
 
     @Override
     public void modificar(Libro libro) {
         entityManager.merge(libro);
+    }
+
+    @Override
+    public void insertarLibroUsuario(Map<String, Object> libro){
+        String libroId;
+        if(libro.get("libroId")==null) {
+            libroId = null;
+        }else{
+            libroId = libro.get("libroId").toString();
+        }
+        String usuarioId = libro.get("usuarioId").toString();
+
+        if(libroId==null){
+            //Si el libro es nuevo preguntamos cual es el ultimo id generado
+            String sql = "SELECT id FROM Libro ORDER BY id DESC";
+            Query query = entityManager.createQuery(sql);
+            libroId = String.valueOf(query.setMaxResults(1).getResultList());
+            //Limpieza de Libro ID para quitar [xxxx] que vienen desde la consulta
+            libroId = libroId.replaceAll("\\[", "")
+                    .replaceAll("]", "");
+
+        }else{
+            //Borramos toda la lista de usuarios que vamos actualizar
+            String sql = "DELETE FROM LibroUsuario WHERE id_libro = :idLibro";
+            entityManager.createQuery(sql)
+                    .setParameter("idLibro", parseInt(libroId))
+                    .executeUpdate();
+        }
+        //Convertimos los usuarios string a array de int
+        String[] separatedStrings = usuarioId.replaceAll("\\[", "")
+                .replaceAll("]", "").split(",");
+
+        int[] intUsarioId = new int[separatedStrings.length];
+
+        //Cargamos el libro para los usuarios puedan verlo
+        for(int i=0; i<intUsarioId.length; i++) {
+            System.out.println(i);
+        }
+
+        //Actualizamos la base de datos con los usuarios que pueden ver el libro
+        for(int i=0; i<intUsarioId.length; i++){
+            String sql = "INSERT INTO libros_usuarios VALUES(?,?)";
+            entityManager.createNativeQuery(sql)
+                    .setParameter(1, libroId)
+                    .setParameter(2, i)
+                    .executeUpdate();
+        }
     }
 
     @Override
@@ -160,6 +217,9 @@ public class LibroDaoImp implements LibroDao {
         /*if(libro.get("creador").toString()!=null) {
             cLibro.setCreador(Integer.parseInt(libro.get("creador").toString()));
         }*/
+
         return cLibro;
     }
+
+
 }

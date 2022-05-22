@@ -63,7 +63,7 @@ async function editarLibro(id){
         return;
     }
 
-    let libroSession;
+    /*let libroSession;
     let var0 = ""; var1 = "";
     $("#libros tr").on('click', function() {
 
@@ -90,7 +90,9 @@ async function editarLibro(id){
             sessionStorage.setItem('libro', JSON.stringify(libroSession));
 
             window.location.href = "http://localhost:8080/librosupload.html";
-    });
+    });*/
+    sessionStorage.setItem('libro', id);
 
+    window.location.href = "http://localhost:8080/librosupload.html";
 
 }
