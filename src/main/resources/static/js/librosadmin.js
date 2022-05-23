@@ -62,7 +62,7 @@ async function eliminarLibro(id){
               if (willDelete) {
                 borrar(id);
               }else{
-                window.location.href = "http://localhost:8080/librosupload.html";
+                location.reload();
               }
         });
       } else {
