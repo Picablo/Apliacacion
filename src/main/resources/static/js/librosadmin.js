@@ -61,6 +61,8 @@ async function eliminarLibro(id){
         .then((willDelete) => {
               if (willDelete) {
                 borrar(id);
+              }else{
+                window.location.href = "http://localhost:8080/librosupload.html";
               }
         });
       } else {
