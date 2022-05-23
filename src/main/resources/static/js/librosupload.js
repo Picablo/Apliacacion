@@ -101,7 +101,12 @@ function proccesFile(file){
         uploadFile(file);
     }else{
         //archivo no valido
-        alert("Error los archivos permitidos son:\n\n "+validExtensions);
+        swal({
+            title: "Error los archivos permitidos son:",
+            text: validExtensions.join(', '),
+            icon: "warning",
+            button: "ok",
+        });
     }
 }
 
@@ -182,7 +187,12 @@ async function registrarLibro(){
                 },
                 body: JSON.stringify(datos)
             });
-            alert("El libro fue CREADO con exito");
+            swal({
+                title: "Exito",
+                text: "El libro fue CREADO",
+                icon: "success",
+                button: "ok",
+            });
         }else{
             const request = await fetch('api/libro/'+libro.id, {
                 method: 'PUT',
@@ -194,7 +204,12 @@ async function registrarLibro(){
             });
 
             sessionStorage.clear();
-            alert("El libro fue MODIFICADO con exito");
+            swal({
+                title: "Exito",
+                text: "El libro fue MODIFICADO",
+                icon: "success",
+                button: "ok",
+            });
         }
 
         window.location.href = 'libros.html';
@@ -357,6 +372,13 @@ async function comprobarDatos(){
         errores = errores + "Debe seleccionar al menos un usuario de accedeso al libro";
     }
 
-    if(!comprobacion){alert(errores);}
+    if(!comprobacion){
+        swal({
+            title: "Cuidado",
+            text: errores,
+            icon: "warning",
+            button: "ok",
+        });
+    }
 }
 

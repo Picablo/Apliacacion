@@ -26,7 +26,7 @@ public class FileUploadController {
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("C:\\Users\\pgamez_eusa\\Desktop\\aplicacion\\src\\main\\resources\\static\\ficheros\\libros");
+        builder.append("C:\\Users\\CASA\\Desktop\\Aplicacion\\src\\main\\resources\\static\\ficheros\\libros");
         builder.append(File.separator);
         builder.append(file.getOriginalFilename());
 

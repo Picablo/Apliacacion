@@ -23,6 +23,11 @@ async function iniciarSesion(){
         localStorage.token = respuesta;
         window.location.href = 'usuarios.html'
     }else{
-        alert("Las credenciales son incorrectas. Por favor intente nuevamente");
+        swal({
+            title: "Aviso!!",
+            text: "Las credenciales son incorrectas.\nPor favor intente nuevamente",
+            icon: "warning",
+            button: "ok",
+        });
     }
 }

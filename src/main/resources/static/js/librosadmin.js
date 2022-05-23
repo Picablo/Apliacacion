@@ -45,54 +45,54 @@ async function cargarLibros(){
 
 async function eliminarLibro(id){
 
-    if(!confirm('¿Desea eliminar este Libro?')){
+    await swal({
+      title: "¿Esta Seguro?",
+      text: "!Una vez borrado el libro esta acción no puede ser deshecha!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("El libro ha sido borrado", {
+          icon: "success",
+          buttons: true
+        })
+        .then((willDelete) => {
+              if (willDelete) {
+                borrar(id);
+              }
+        });
+      } else {
         return;
-    }
-
-    const request = await fetch('api/libros/' +id, {
-        method: 'DELETE',
-        headers: getHeaders()
+      }
     });
-
-    location.reload()
+}
+//Funcion creado porque tiene que estar dentro principal del cuerpo de una funcion
+//Sino da problemas ^^
+async function borrar(id){
+        const request = await fetch('api/libros/' +id, {
+            method: 'DELETE',
+            headers: getHeaders()
+        });
+        location.reload()
 }
 
 async function editarLibro(id){
 
-    if(!confirm('¿Desea editar este Libro?')){
+    swal({
+      title: "Editar",
+      text: "¿Desea editar este Libro?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        sessionStorage.setItem('libro', id);
+        window.location.href = "http://localhost:8080/librosupload.html";
+      }else{
         return;
-    }
-
-    /*let libroSession;
-    let var0 = ""; var1 = "";
-    $("#libros tr").on('click', function() {
-
-
-            var0 = $(this).find('td:eq(0)').html();
-            var1 = $(this).find('td:eq(1)').html();
-            var2 = $(this).find('td:eq(2)').html();
-            var3 = $(this).find('td:eq(3)').html();
-            var4 = $(this).find('td:eq(4)').html();
-            var5 = $(this).find('td:eq(5)').html();
-            var6 = $(this).find('td:eq(6)').html();
-
-            libroSession = {id: id,
-                            tipo: var0,
-                            nombre: var1,
-                            categoria: var2,
-                            seccion: var3,
-                            autor: var4,
-                            tamano: var5,
-                            fecha: var6
-            };
-
-
-            sessionStorage.setItem('libro', JSON.stringify(libroSession));
-
-            window.location.href = "http://localhost:8080/librosupload.html";
-    });*/
-    sessionStorage.setItem('libro', id);
-
-    window.location.href = "http://localhost:8080/librosupload.html";
-
+      }
+    });
 }

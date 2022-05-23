@@ -14,7 +14,13 @@ async function registrarUsuario(){
     let repetirPassword = document.getElementById("txtRepetirPassword").value
 
     if (repetirPassword != datos.password) {
-        alert('La contraseña que escribiste es diferente');
+        swal({
+            title: "Aviso!!",
+            text: "La contraseña que escribiste es diferente",
+            icon: "warning",
+            button: "ok",
+        });
+
         return;
     }
 
