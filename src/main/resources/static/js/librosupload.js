@@ -206,7 +206,7 @@ async function comprobarLibro(){
     //Si el libro es editado trae los datos
     if(sessionStorage.getItem('libro')!=null){
 
-        request = await fetch('api/libros/'+window.sessionStorage.getItem('libro'), {
+        request = await fetch('api/libro/'+window.sessionStorage.getItem('libro'), {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

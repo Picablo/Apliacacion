@@ -8,6 +8,7 @@ import de.mkammerer.argon2.Argon2Factory;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +27,27 @@ public class LibroController {
         return libroId != null;
     }
 
-    @RequestMapping(value = "api/libros/{id}", method = RequestMethod.GET)
-    public Libro getLibro(@PathVariable Integer id){
+    @RequestMapping(value = "api/libro/{id}", method = RequestMethod.GET)
+    public Libro getLibro(@PathVariable Integer id) {
         return libroDao.obtenerLibroPorId(id);
     }
+
+    @RequestMapping(value = "api/libros/libusu/{id}", method = RequestMethod.GET)
+    public List<Libro> getLibrosPorUsu(@PathVariable Integer id, @RequestHeader(value = "Authorization") String token) {
+        if (!validarToken(token)) { return null;}
+
+        List<Libro> cLibro = new ArrayList<Libro>();
+        List<Integer> nLibros = libroDao.getLibrosPorUsuario(id);
+
+        if(nLibros!=null) {
+            for (int i = 0; i < nLibros.size(); i++) {
+                cLibro.add(libroDao.obtenerLibroPorId(nLibros.get(i)));
+            }
+        }else{return null;}
+
+        return cLibro;
+    }
+
 
     @RequestMapping(value = "api/libros/librosusuario/{id}", method = RequestMethod.GET)
     public List<Integer> getLibrosPorUsuario(@PathVariable Integer id){

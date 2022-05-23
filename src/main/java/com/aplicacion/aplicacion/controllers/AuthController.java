@@ -30,7 +30,7 @@ public class AuthController {
         return "FAIL";
     }
 
-    @RequestMapping(value = "api/jwt/{token}", method = RequestMethod.POST)
+    @RequestMapping(value = "api/jwt/{token}", method = RequestMethod.GET)
     public String id(@PathVariable String token){
         return jwtUtil.getKey(token);
     }

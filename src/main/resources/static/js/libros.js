@@ -15,7 +15,16 @@ function getHeaders(){
 
 async function cargarLibros(){
 
-    const request = await fetch('api/libros', {
+    let request = await fetch('api/jwt/'+ localStorage.getItem("token"), {
+       method: 'GET',
+       headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+   });
+   const id = await request.json();
+
+    request = await fetch('api/libros/libusu/'+ id, {
         method: 'GET',
         headers: getHeaders()
     });

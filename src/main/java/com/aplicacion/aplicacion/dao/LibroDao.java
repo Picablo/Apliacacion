@@ -9,6 +9,7 @@ public interface LibroDao {
 
     List<Libro> getLibros();
 
+
     List<Integer> getLibrosPorUsuario(Integer id);
 
     List<Integer> getUsuariosPorLibro(Integer id);

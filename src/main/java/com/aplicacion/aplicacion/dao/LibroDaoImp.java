@@ -30,10 +30,9 @@ public class LibroDaoImp implements LibroDao {
 
    @Override
     public List<Integer> getLibrosPorUsuario(Integer idUsuario) {
-       String query = "SELECT id FROM Libro ORDER BY id DESC";
-       //String query = "SELECT DISTINCT id_libro FROM LibroUsuario WHERE id_usuario = :id";
+       String query = "SELECT DISTINCT id_libro FROM LibroUsuario WHERE id_usuario = :id";
        return entityManager.createQuery(query)
-               //.setParameter("id",idUsuario)
+               .setParameter("id",idUsuario)
                .getResultList();
 
 
