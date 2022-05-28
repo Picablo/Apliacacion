@@ -6,21 +6,24 @@
 }
 
 body {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
 }
 
 .drop-area{
     border: 5px dashed #ddd;
-    height: 500px;
-    width: 700px;
+    height: 300px;
+    width: 500px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 50px;
 }
 
 .drop-area.active{
