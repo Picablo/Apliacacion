@@ -20,8 +20,6 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    <link href="css/librosupload.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -36,7 +34,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="img/gd_fondo .png" height="25px">
+                    <img src="img/gd_fondo.png" height="25px">
                 </div>
                 <div class="sidebar-brand-text mx-3">Gestor <sup>1</sup></div>
             </a>
@@ -160,14 +158,14 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span id="spanName" class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img id="imgSesion" class="img-profile rounded-circle"
-                                     src="img/undraw_profile.svg">
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div id="divUsuLogin" class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
+                                aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Usuario
@@ -189,93 +187,62 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
+                    <div class="container">
 
-                        <h1 class="h3 mb-2 text-gray-800">Carga de Libros</h1>
-                        <p class="mb-4">Subida/MOdificación de Libros en el Sistema</a>.</p>
+                        <!-- Outer Row -->
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                                    <div class="col-lg-7">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Registrarse</h1>
+                                            </div>
+                                            <form class="user">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <input type="text" class="form-control form-control-user" id="txtNombre"
+                                                               placeholder="Nombre">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control form-control-user" id="txtApellido"
+                                                               placeholder="Apellido">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control form-control-user" id="txtEmail"
+                                                           placeholder="Email">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <input type="password" class="form-control form-control-user"
+                                                               id="txtPassword" placeholder="Password">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="password" class="form-control form-control-user"
+                                                               id="txtRepetirPassword" placeholder="Confirmar Password">
+                                                    </div>
+                                                </div>
+                                                <a onclick="registrarUsuario()" href="#" class="btn btn-primary btn-user btn-block">
+                                                    Registrare
+                                                </a>
 
-                        <!-- DataTales Example -->
-                    <div class="text-center">
-                        <div class="drop-area">
-                            <h2>Arrastra y suelta Ficheros</h2>
-                            <span>o</span>
-                            <button>Selecciona tu libro a subir</button>
-                            <input type="file" name="" id="input-file" hidden multiple/>
+                                            </form>
+                                            <hr>
+                                            <div class="text-center">
+                                                <a class="small" href="login.html">¿Ya tienes una cuenta? Inicia sesión! </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-
-                    <form class="user">
-                        <div class="form-group row">
-                            <div> FICHERO
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtTipo"
-                                           placeholder="Tipo" readonly>
-                                </div>
-
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtRuta"
-                                           placeholder="Ruta" readonly>
-                                </div>
-
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtTamano"
-                                           placeholder="tamano" readonly>
-                                </div>
-
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtFecha"
-                                           placeholder="Fecha" readonly>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="txtNombre"
-                                       placeholder="Nombre" required>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="txtDescripcion"
-                                       placeholder="Descripcion" required>
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="txtCategoria"
-                                       placeholder="Categoria" list="listCategoria" required>
-                                <datalist id="listCategoria">
-                                </datalist>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="txtSeccion"
-                                       placeholder="Seccion" list="listSeccion" required>
-                                <datalist id="listSeccion">
-                                </datalist>
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="txtAutor"
-                                       placeholder="Autor" list="listAutor" required>
-                                <datalist id="listAutor">
-                                </datalist>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="number" class="form-control form-control-user" id="txtIsbn" nim="1"
-                                       max="9999999999999" placeholder="ISBN" required>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="">
-                                <select name="select" class="form-select" size="10" id="txtUserId" multiple><!-- onclick="cambiaPermisos()">-->
-                                </select>
-                            </div>
-
-                        </div>
-                        <a onclick="registrarLibro()" id="txtButton" href="#" class="btn btn-primary btn-user btn-block">
-                            Registrar
-                        </a>
-
-                    </form>
-
-
-
                 </div>
+
                 <!-- /.container-fluid -->
 
             </div>
@@ -290,10 +257,10 @@
                     </div>
                 </div>
             </footer>
-    </div>
+
             <!-- End of Footer -->
 
-
+        </div>
         <!-- End of Content Wrapper -->
 
     </div>
@@ -316,9 +283,9 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Seleccione "Logout" si desea cerrar la sesión.</div>
+                <div  class="modal-body">Seleccione "Logout" si desea cerrar la sesión.</div>
                 <div class="modal-footer">
-                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a  onclick="cerrarSesion()" class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
@@ -335,18 +302,17 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins
+    <!-- Page level plugins-->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>-->
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Sweet alert para personalizar los alert de java script-->
     <script src="js/sweetalert.js"></script>
 
     <!-- Page level custom scripts
     <script src="js/demo/datatables-demo.js"></script>-->
-    <script src="js/sesion.js"></script>
-    <script src="js/librosupload.js"></script>
-
+    <script src="js/registrar.js"></script>
+    <!--<script src="js/sesion.js"></script>-->
 
 </body>
 
