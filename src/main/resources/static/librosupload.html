@@ -206,70 +206,80 @@
 
 
                     <form class="user">
-                        <div class="form-group row">
-                            <div> FICHERO
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtTipo"
-                                           placeholder="Tipo" readonly>
+                        <div class="row text-center">
+                            <!--Columna Izquierda Vacia para centrar-->
+                            <div class="col"></div>
+                            <!--Columna central-->
+                            <div class="col-sm-6 mb-6 mb-sm-0">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="txtTipo"
+                                               placeholder="Tipo" readonly>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="txtRuta"
+                                               placeholder="Ruta" readonly>
+                                    </div>
                                 </div>
-
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtRuta"
-                                           placeholder="Ruta" readonly>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="txtTamano"
+                                               placeholder="tamano" readonly>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="txtFecha"
+                                               placeholder="Fecha" readonly>
+                                    </div>
                                 </div>
-
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtTamano"
-                                           placeholder="tamano" readonly>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="txtNombre"
+                                           placeholder="Nombre" required>
                                 </div>
-
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="txtFecha"
-                                           placeholder="Fecha" readonly>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="txtDescripcion"
+                                               placeholder="Descripcion" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="txtAutor"
+                                               placeholder="Autor" list="listAutor" required>
+                                        <datalist id="listAutor">
+                                        </datalist>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="txtCategoria"
+                                               placeholder="Categoria" list="listCategoria" required>
+                                        <datalist id="listCategoria">
+                                        </datalist>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="txtSeccion"
+                                               placeholder="Seccion" list="listSeccion" required>
+                                        <datalist id="listSeccion">
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <input type="number" class="form-control form-control-user col-sm-6" id="txtIsbn" nim="1"
+                                           max="9999999999999" placeholder="ISBN" required>
+                                </div>
+                                <div class="form-group">
+                                    <div class="">
+                                        <select name="select" class="form-select" size="10" id="txtUserId" multiple><!-- onclick="cambiaPermisos()">-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="registrarLibro()" id="txtButton" href="#" class="btn btn-lg btn-primary btn-user">
+                                    Registrar
+                                </button>
 
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="txtNombre"
-                                       placeholder="Nombre" required>
+
                             </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="txtDescripcion"
-                                       placeholder="Descripcion" required>
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="txtCategoria"
-                                       placeholder="Categoria" list="listCategoria" required>
-                                <datalist id="listCategoria">
-                                </datalist>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="txtSeccion"
-                                       placeholder="Seccion" list="listSeccion" required>
-                                <datalist id="listSeccion">
-                                </datalist>
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="txtAutor"
-                                       placeholder="Autor" list="listAutor" required>
-                                <datalist id="listAutor">
-                                </datalist>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="number" class="form-control form-control-user" id="txtIsbn" nim="1"
-                                       max="9999999999999" placeholder="ISBN" required>
-                            </div>
+                            <!--Columna Derecha Vacia para centrar-->
+                            <div class="col"></div>
                         </div>
-                        <div>
-                            <div class="">
-                                <select name="select" class="form-select" size="10" id="txtUserId" multiple><!-- onclick="cambiaPermisos()">-->
-                                </select>
-                            </div>
-
-                        </div>
-                        <a onclick="registrarLibro()" id="txtButton" href="#" class="btn btn-primary btn-user btn-block">
-                            Registrar
-                        </a>
 
                     </form>
 

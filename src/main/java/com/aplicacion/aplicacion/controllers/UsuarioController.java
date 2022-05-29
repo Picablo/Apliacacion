@@ -25,7 +25,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.GET)
-    public Usuario getUsuario(@PathVariable Long id){
+    public Usuario getUsuario(@PathVariable Integer id){
         Usuario usuario = new Usuario();
         usuario.setId(id);
         usuario.setNombre("Pablo");

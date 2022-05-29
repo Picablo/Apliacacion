@@ -11,14 +11,21 @@ if(localStorage.token == null){
     imagenSesion = "img/undraw_withoutlogin.svg";
     nombreSesion = "";
     var URLactual = window.location;
+
     if(URLactual != "http://localhost:8080/login.html"){
+/*        swal({
+            title: "Advertencia",
+            text: "Necesita primero iniciar Sesión\nantes de poder usar la aplicación",
+            icon: "warning",
+            button: "ok",
+        });*/
         window.location.href = 'login.html';
     }
+
 }else{
 
     imagenSesion = "img/undraw_profile_1.svg";
     nombreSesion = "Usuario Logueado";
-
 
 }
 

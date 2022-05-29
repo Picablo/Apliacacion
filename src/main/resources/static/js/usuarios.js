@@ -37,10 +37,34 @@ async function cargarUsuarios(){
 
 async function eliminarUsuario(id){
 
-    if(!confirm('¿Desea eliminar este usuario?')){
+    await swal({
+      title: "¿Esta Seguro?",
+      text: "!Una vez borrado el Usuario esta acción no puede ser deshecha!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("El Usuario ha sido borrado", {
+          icon: "success",
+          buttons: true
+        })
+        .then((willDelete) => {
+              if (willDelete) {
+                borrar(id);
+              }else{
+                location.reload();
+              }
+        });
+      } else {
         return;
-    }
+      }
+    });
+}
 
+
+async function borrar(id){
     const request = await fetch('api/usuarios/' +id, {
         method: 'DELETE',
         headers: getHeaders()
@@ -53,7 +77,7 @@ async function editarUsuario(id){
 
     swal({
       title: "Editar",
-      text: "¿Desea editar este Libro?",
+      text: "¿Desea editar este Usuario?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
