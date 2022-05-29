@@ -23,14 +23,12 @@ async function cargarUsuarios(){
 
     let listadoHtml = '';
     for (let usuario of usuarios){
-        let botonEliminar = '<a href="#" onclick="eliminarUsuario('+usuario.id+')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
 
-        let usuarioHtml = '<tr><td>'+usuario.id+'</td><td>'+usuario.nombre+' '+usuario.apellido+'</td><td>'+usuario.mail+'</td><td>'+usuario.telefono+'</td><td>'+botonEliminar+'</td></tr>'
+        let botonEliminar = '<a href="#" onclick="eliminarUsuario('+usuario.id+')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
+        let botonModificar = '<a href="#" onclick="editarUsuario('+usuario.id+')" class="btn  btn-warning btn-circle btn-sm"><i class="fas fa-exclamation-triangle"></i></a>';
+        let usuarioHtml = '<tr><td>'+usuario.id+'</td><td>'+usuario.nombre+' '+usuario.apellido+'</td><td>'+usuario.mail+'</td><td>'+usuario.telefono+'</td><td>'+botonEliminar+' '+botonModificar+'</td></tr>';
         listadoHtml += usuarioHtml;
     }
-
-    console.log(usuarios);
-
 
     document.querySelector('#usuarios tbody').outerHTML = listadoHtml;
 
@@ -49,4 +47,23 @@ async function eliminarUsuario(id){
     });
 
     location.reload()
+}
+
+async function editarUsuario(id){
+
+    swal({
+      title: "Editar",
+      text: "¿Desea editar este Libro?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        sessionStorage.setItem('usuario', id);
+        window.location.href = "http://localhost:8080/usuariosadmin.html";
+      }else{
+        return;
+      }
+    });
 }

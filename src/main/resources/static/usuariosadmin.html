@@ -188,42 +188,68 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <h1 class="h3 mb-2 text-gray-800">Gestión de Usuarios</h1>
-                    <p class="mb-4">Listado de Usuarios en el Sistema</a>.</p>
+                    <div class="container">
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Listado de Usuarios</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="usuarios" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre Completo</th>
-                                        <th>Email</th>
-                                        <th>Teléfono</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                        <!-- Outer Row -->
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                                    <div class="col-lg-7">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Registrarse</h1>
+                                            </div>
+                                            <form class="user">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <input type="text" class="form-control form-control-user" id="txtNombre"
+                                                               placeholder="Nombre">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control form-control-user" id="txtApellido"
+                                                               placeholder="Apellido">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control form-control-user" id="txtEmail"
+                                                           placeholder="Email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="tipo" class="form-control" id="txt3Tipo">
+                                                        <option value="0">Usuario Estandar</option>
+                                                        <option value="1">Administrador</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group row wrapper">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <input type="password" class="form-control form-control-user"
+                                                               id="txtPassword" placeholder="Password">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="password" class="form-control form-control-user"
+                                                               id="txtRepetirPassword" placeholder="Confirmar Password">
+                                                    </div>
+                                                </div>
+                                                <a onclick="registrarUsuario()" href="#" class="btn btn-primary btn-user btn-block">
+                                                    Registrare
+                                                </a>
 
-                                    </tbody>
-                                </table>
+                                            </form>
+                                            <hr>
+                                            <div class="text-center">
+                                                <a class="small" href="login.html">¿Ya tienes una cuenta? Inicia sesión! </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!--Boton usuario nuevo-->
-                    <div>
-                        <form action="../usuariosadmin.html#">
-                            <input type="submit" class="btn btn-primary" value="Añadir Usuario Nuevo" />
-                        </form>
-                    </div>
-
 
                 </div>
+
                 <!-- /.container-fluid -->
 
             </div>
@@ -238,10 +264,10 @@
                     </div>
                 </div>
             </footer>
-    </div>
+
             <!-- End of Footer -->
 
-
+        </div>
         <!-- End of Content Wrapper -->
 
     </div>
@@ -264,9 +290,9 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Seleccione "Logout" si desea cerrar la sesión.</div>
+                <div  class="modal-body">Seleccione "Logout" si desea cerrar la sesión.</div>
                 <div class="modal-footer">
-                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a  onclick="cerrarSesion()" class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
@@ -292,9 +318,8 @@
 
     <!-- Page level custom scripts
     <script src="js/demo/datatables-demo.js"></script>-->
-    <script src="js/sesion.js"></script>
-    <script src="js/usuarios.js"></script>
-
+    <script src="js/registrar.js"></script>
+    <!--<script src="js/sesion.js"></script>-->
 
 </body>
 
