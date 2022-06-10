@@ -126,7 +126,7 @@ async function uploadFile(file){
         fichero = JSON.parse(requestText);
 
         document.getElementById("txtTipo").value = fichero.tipo;
-        document.getElementById("txtRuta").value = fichero.ruta;
+        document.getElementById("txtRuta").value = fichero.nombre;
         document.getElementById("txtTamano").value = fichero.tamano;
         if(document.getElementById("txtNombre").value == "" ){
             document.getElementById("txtNombre").value = fichero.nombre;

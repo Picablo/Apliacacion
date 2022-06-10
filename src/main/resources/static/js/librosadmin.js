@@ -31,7 +31,7 @@ async function cargarLibros(){
 
         let botonEliminar = '<a href="#" onclick="eliminarLibro('+libro.id+')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
         let botonEditar = '<a href="#" onclick="editarLibro('+libro.id+')" class="btn  btn-warning btn-circle btn-sm"><i class="fas fa-exclamation-triangle"></i></a>';
-        let libroHtml = '<tr><td>'+libro.tipo+'</td><td data-toggle="tooltip" data-placement="top" title="'+libro.descripcion+'">'+libro.nombre+'</td><td>'+libro.categoria+'</td><td>'+libro.seccion+'</td><td>'+libro.autor+'</td><td>'+libro.tamano+'</td><td>'+libro.fecha+'</td><td>'+botonEditar+' '+botonEliminar+'</td></tr>'
+        let libroHtml = '<tr><td>'+libro.tipo+'</td><td data-toggle="tooltip" data-placement="top" title="'+libro.descripcion+'"><a href="ficheros/libros/'+libro.ruta+'" download>'+libro.nombre+'</a></td><td>'+libro.categoria+'</td><td>'+libro.seccion+'</td><td>'+libro.autor+'</td><td>'+libro.tamano+'</td><td>'+libro.fecha+'</td><td>'+botonEditar+' '+botonEliminar+'</td></tr>'
         listadoHtml += libroHtml;
     }
 

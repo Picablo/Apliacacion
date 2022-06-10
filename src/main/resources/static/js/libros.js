@@ -40,7 +40,7 @@ async function cargarLibros(){
             libro.fecha = libro.fecha.substr(0,10);
         }
 
-        let libroHtml = '<tr><td>'+libro.tipo+'</td><td data-toggle="tooltip" data-placement="top" title="'+libro.descripcion+'">'+libro.nombre+'</td><td>'+libro.categoria+'</td><td>'+libro.seccion+'</td><td>'+libro.autor+'</td><td>'+libro.tamano+'</td><td>'+libro.fecha+'</td></tr>'
+        let libroHtml = '<tr><td>'+libro.tipo+'</td><td data-toggle="tooltip" data-placement="top" title="'+libro.descripcion+'"><a href="ficheros/libros/'+libro.ruta+'" download>'+libro.nombre+'</a></td><td>'+libro.categoria+'</td><td>'+libro.seccion+'</td><td>'+libro.autor+'</td><td>'+libro.tamano+'</td><td>'+libro.fecha+'</td></tr>'
         listadoHtml += libroHtml;
     }
 
