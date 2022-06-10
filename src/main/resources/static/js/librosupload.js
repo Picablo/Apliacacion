@@ -74,36 +74,49 @@ function showFiles(files){
 function proccesFile(file){
     const docType = file.type;
     const validExtensions = ["image/png", "image/bmp", "image/gif", "image/jpeg", "image/tiff", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/pdf"];
+    const TamanioMaxBYTES = 10000000; // 1MB = 1 millón de bytes
 
-    if(validExtensions.includes(docType)){
-        //archivo valido
-        const fileReader = new FileReader();
-        const id = `file-${Math.random().toString(32).substring(7)}`;
-        fileReader.addEventListener('load', e =>{
-            const fileUrl = fileReader.result;
-            const image = `
-                <div id="${id}" class="file-container">
-                    <img src="${fileUrl}" alt="${file.name}" width="50">
-                    <div class="status">
-                        <span>${file.name}</span>
-                        <span class="status-text">
-                            Loading...
-                        </span>
+    //Comprobamos que el tamaño no sea superior a 10 MB
+    console.log(file.size);
+    if(file.size <= TamanioMaxBYTES){
+        if(validExtensions.includes(docType)){
+            //archivo valido
+            const fileReader = new FileReader();
+            const id = `file-${Math.random().toString(32).substring(7)}`;
+            fileReader.addEventListener('load', e =>{
+                const fileUrl = fileReader.result;
+                const image = `
+                    <div id="${id}" class="file-container">
+                        <img src="${fileUrl}" alt="${file.name}" width="50">
+                        <div class="status">
+                            <span>${file.name}</span>
+                            <span class="status-text">
+                                Loading...
+                            </span>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
 
-            //const html = document.querySelector("#preview").innerHTML;
-            //document.querySelector("#preview").innerHTML = image + html;
-        });
+                //const html = document.querySelector("#preview").innerHTML;
+                //document.querySelector("#preview").innerHTML = image + html;
+            });
 
-        fileReader.readAsDataURL(file);
-        uploadFile(file);
+            fileReader.readAsDataURL(file);
+            uploadFile(file);
+        }else{
+            //archivo no valido
+            swal({
+                title: "Error los archivos permitidos son:",
+                text: validExtensions.join(', '),
+                icon: "warning",
+                button: "ok",
+            });
+        }
     }else{
         //archivo no valido
         swal({
-            title: "Error los archivos permitidos son:",
-            text: validExtensions.join(', '),
+            title: "Error el fichero supera el máximo tamaño permitido:",
+            text: "MÁXIMO "+ TamanioMaxBYTES / 1000000 +"MB",
             icon: "warning",
             button: "ok",
         });
