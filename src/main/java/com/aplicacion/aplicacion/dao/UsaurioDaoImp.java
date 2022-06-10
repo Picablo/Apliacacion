@@ -1,5 +1,6 @@
 package com.aplicacion.aplicacion.dao;
 
+import com.aplicacion.aplicacion.models.Libro;
 import com.aplicacion.aplicacion.models.Usuario;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -8,8 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.Integer.parseInt;
 
 @Repository
 @Transactional
@@ -73,5 +77,46 @@ public class UsaurioDaoImp implements UsuarioDao{
         String query = "SELECT id,nombre,tipo FROM Usuario";
         return entityManager.createQuery(query).getResultList();
 
+    }
+
+    @Override
+    public Usuario parseRequestBodyUsuario(Map<String, Object> usuario){
+        Usuario cUsuario = new Usuario();
+
+        if(usuario.get("nombre").toString()!=null) {
+            cUsuario.setNombre(usuario.get("nombre").toString());
+        }
+        if(usuario.get("apellido").toString()!=null) {
+            cUsuario.setApellido(usuario.get("apellido").toString());
+        }
+        if(usuario.get("mail").toString()!=null) {
+            cUsuario.setMail(usuario.get("mail").toString());
+        }
+        if(usuario.get("tipo")!=null) {
+            cUsuario.setTipo(parseInt(usuario.get("tipo").toString()));
+        }
+
+        if(usuario.get("password").toString()!=null) {
+            cUsuario.setPassword(usuario.get("password").toString());
+        }
+        if(usuario.get("telefono").toString()!=null) {
+            cUsuario.setTelefono(usuario.get("telefono").toString());
+        }
+
+        return cUsuario;
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorId(Integer id) {
+        String query = "FROM Usuario WHERE id = :id";
+        List<Usuario> lista = entityManager.createQuery(query)
+                .setParameter("id", id)
+                .getResultList();
+
+        if(lista.isEmpty()){
+            return null;
+        }
+
+        return lista.get(0);
     }
 }

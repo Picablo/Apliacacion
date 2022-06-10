@@ -3,6 +3,7 @@ package com.aplicacion.aplicacion.dao;
 import com.aplicacion.aplicacion.models.Usuario;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UsuarioDao {
 
@@ -17,4 +18,8 @@ public interface UsuarioDao {
     Usuario obtenerUsuarioPorCredenciales(Usuario usuario);
 
     List<Usuario> getUsuarioId();
+
+    Usuario parseRequestBodyUsuario(Map<String, Object> Usuario);
+
+    Usuario obtenerUsuarioPorId(Integer id);
 }

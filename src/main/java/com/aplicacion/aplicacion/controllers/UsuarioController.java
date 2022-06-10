@@ -2,6 +2,7 @@ package com.aplicacion.aplicacion.controllers;
 
 import com.aplicacion.aplicacion.dao.UsuarioDao;
 import com.aplicacion.aplicacion.models.Usuario;
+import com.aplicacion.aplicacion.models.Usuario;
 import com.aplicacion.aplicacion.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.Integer.parseInt;
 
 @RestController
 public class UsuarioController {
@@ -58,6 +62,22 @@ public class UsuarioController {
                          @PathVariable Integer id) {
         if (!validarToken(token)) { return;}
         usuarioDao.eliminar(id);;
+    }
+    @RequestMapping(value = "api/usuario/{id}", method = RequestMethod.PUT)
+    public void editarUsuario(@RequestBody Map<String, Object> usuario,
+                            @PathVariable Integer id){
+
+        Usuario cUsuario = usuarioDao.parseRequestBodyUsuario(usuario);
+        Usuario usuarioActual = usuarioDao.obtenerUsuarioPorId(id);
+
+        usuarioActual.setNombre(cUsuario.getNombre());
+        usuarioActual.setApellido(cUsuario.getApellido());
+        usuarioActual.setMail(cUsuario.getMail());
+        usuarioActual.setTipo(cUsuario.getTipo());
+        usuarioActual.setPassword(cUsuario.getPassword());
+        usuarioActual.setTelefono(cUsuario.getTelefono());
+
+        usuarioDao.modificar(usuarioActual);
     }
 
     //Esta repe porque no es mas que un /api/usuarios
