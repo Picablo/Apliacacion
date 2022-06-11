@@ -77,7 +77,6 @@ function proccesFile(file){
     const TamanioMaxBYTES = 10000000; // 1MB = 1 millón de bytes
 
     //Comprobamos que el tamaño no sea superior a 10 MB
-    console.log(file.size);
     if(file.size <= TamanioMaxBYTES){
         if(validExtensions.includes(docType)){
             //archivo valido
@@ -146,7 +145,7 @@ async function uploadFile(file){
         }
 
         date = new Date;
-        console.log(date);
+
         year = date.getFullYear();
         month = date.getMonth()+1;
         if(month < 10){
@@ -317,9 +316,7 @@ async function tableUserAccess(){
     });
 
     userID = await usuarios.json();
-    console.log(userID);
-    console.log(userID.length);
-    console.log(userID[0][0]);
+
     for (let usuario of userID) {
         $('#txtUserId').append("<option value="+ usuario.id+">"+usuario.nombre+" "+usuario.apellido+"</option>");
     }
@@ -335,57 +332,47 @@ async function comprobarDatos(){
     let errores = "";
 
     if(datos.tipo == ""){
-        comprobacion= false;
         errores = errores + "Tíene que subir un fichero para evitar error en el campo: TIPO\n";
     }
     if(datos.nombre == ""){
-        comprobacion= false;
         errores = errores + "Tíene que rellenar el campo: NOMBRE\n";
     }
     if(datos.descripcion == ""){
-        comprobacion= false;
         errores = errores + "Tíene que rellenar el campo: DESCRIPCION\n";
     }
     if(datos.fecha == ""){
-        comprobacion= false;
         errores = errores + "Tíene que subir un fichero para evitar error en el campo: FECHA\n";
     }
     if(datos.autor == ""){
-        comprobacion= false;
         errores = errores + "Tíene que rellenar el campo: AUTOR\n";
     }
     if(datos.categoria == ""){
-        comprobacion= false;
         errores = errores + "Tíene que rellenar el campo: CATEGORIA\n";
     }
     if(datos.seccion == ""){
-        comprobacion= false;
         errores = errores + "Tíene que rellenar el campo: SECCION\n";
     }
     if(datos.tamaño == ""){
-        comprobacion= false;
         errores = errores + "Tíene que subir un fichero para evitar error en el campo: TAMAÑO\n";
     }
     //libro.Claves = document.getElementById("txtClaves").value;
     if(datos.ruta == ""){
-        comprobacion= false;
         errores =errores + "Tíene que subir un fichero para evitar error en el campo: RUTA\n";
     }
     //Expresion regular para calcualar que el ISBN es un número aunque sea string
     let valoresAceptados = /^[0-9]+$/;
      if(datos.isbn == "" || (datos.isbn).match(valoresAceptados) == null){
-        comprobacion= false;
         document.getElementById("txtIsbn").value = "";
         errores = errores + "Tíene que rellenar el campo: ISBN\n";
         errores = errores + "ISBN (Es un numero entre 0 y 9999999999999)\n"
     }
     //libro.creador = document.getElementById("txtCreador").value;
     if(datos.usuarioId == ""){
-        comprobacion= false;
         errores = errores + "Debe seleccionar al menos un usuario de accedeso al libro";
     }
 
-    if(!comprobacion){
+    if(errores != ""){
+        comprobacion=false;
         swal({
             title: "Cuidado",
             text: errores,

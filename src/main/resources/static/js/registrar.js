@@ -13,16 +13,36 @@ async function registrarUsuario(){
 
     let repetirPassword = document.getElementById("txtRepetirPassword").value
 
-    if (repetirPassword != datos.password) {
+    let error = ""
+
+    if(datos.nombre == ""){
+        error = "Debe rellenar el campo: NOMBRE\n";
+    }
+
+    if(datos.apellido == ""){
+        error = error + "Debe rellenar el campo: APELLIDO\n";
+    }
+
+    mailVerificacion = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if(!mailVerificacion.test(datos.mail)){
+        error = error +  "El MAIL no cumple los requisitos\n";
+    }
+
+    if (repetirPassword != datos.password || datos.password == "") {
+        error = error +  "Compruebe el PASSWORD";
+    }
+
+    if( error != ""){
         swal({
             title: "Aviso!!",
-            text: "La contraseña que escribiste es diferente",
+            text: error,
             icon: "warning",
             button: "ok",
         });
 
         return;
     }
+
 
     const request = await fetch('api/usuarios', {
         method: 'POST',
@@ -32,6 +52,13 @@ async function registrarUsuario(){
         },
         body: JSON.stringify(datos)
     });
-    alert("La cuenta fue creada con exito");
-    window.location.href = 'principal.html';
+    swal({
+        title: "Exito!!",
+        text: "El usuario fue creado correctamente",
+        icon: "success",
+        button: "ok",
+    })
+    .then((value) => {
+      window.location.href = 'principal.html';
+    });
 }

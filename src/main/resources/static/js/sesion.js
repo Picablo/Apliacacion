@@ -12,6 +12,10 @@ if(localStorage.token == null){
     nombreSesion = "";
     var URLactual = window.location;
 
+    if(document.getElementById("menuOption") != null){
+        document.getElementById("menuOption").innerHTML = "";
+    }
+
     if(URLactual != "http://localhost:8080/login.html"){
 /*        swal({
             title: "Advertencia",
@@ -23,18 +27,16 @@ if(localStorage.token == null){
     }
 
 }else{
-
     imagenSesion = "img/undraw_profile_1.svg";
     nombreSesion = "Usuario Logueado";
-
 }
 
 document.getElementById("imgSesion").src = imagenSesion;
 document.getElementById("spanName").innerHTML= nombreSesion;
 
+
 function cerrarSesion(){
     sessionStorage.clear();
     localStorage.clear();
     window.location.href = 'login.html';
-    alert("Cerrar Sesion");
 }

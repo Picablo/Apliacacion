@@ -2,7 +2,6 @@ package com.aplicacion.aplicacion.controllers;
 
 import com.aplicacion.aplicacion.dao.UsuarioDao;
 import com.aplicacion.aplicacion.models.Usuario;
-import com.aplicacion.aplicacion.models.Usuario;
 import com.aplicacion.aplicacion.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.Integer.parseInt;
 
 @RestController
 public class UsuarioController {
@@ -30,13 +27,7 @@ public class UsuarioController {
 
     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.GET)
     public Usuario getUsuario(@PathVariable Integer id){
-        Usuario usuario = new Usuario();
-        usuario.setId(id);
-        usuario.setNombre("Pablo");
-        usuario.setApellido("Gamez");
-        usuario.setMail("pgamez@eusa.es");
-        usuario.setTelefono("213123123");
-        return usuario;
+        return usuarioDao.obtenerUsuarioPorId(id);
     }
 
     @RequestMapping(value = "api/usuarios", method = RequestMethod.GET)
@@ -69,6 +60,11 @@ public class UsuarioController {
 
         Usuario cUsuario = usuarioDao.parseRequestBodyUsuario(usuario);
         Usuario usuarioActual = usuarioDao.obtenerUsuarioPorId(id);
+
+        //Encriptar la contraseña de cUsuario para Guardarla modificada
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+        String hash = argon2.hash(1,1024,1, cUsuario.getPassword());
+        cUsuario.setPassword(hash);
 
         usuarioActual.setNombre(cUsuario.getNombre());
         usuarioActual.setApellido(cUsuario.getApellido());

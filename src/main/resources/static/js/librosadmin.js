@@ -35,9 +35,6 @@ async function cargarLibros(){
         listadoHtml += libroHtml;
     }
 
-    console.log(libros);
-
-
     document.querySelector('#libros tbody').outerHTML = listadoHtml;
 
     $('#libros').DataTable();

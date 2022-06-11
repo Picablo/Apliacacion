@@ -1,6 +1,5 @@
 package com.aplicacion.aplicacion.dao;
 
-import com.aplicacion.aplicacion.models.Libro;
 import com.aplicacion.aplicacion.models.Usuario;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -9,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +15,7 @@ import static java.lang.Integer.parseInt;
 
 @Repository
 @Transactional
-public class UsaurioDaoImp implements UsuarioDao{
+public class UsuarioDaoImp implements UsuarioDao{
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -35,9 +33,9 @@ public class UsaurioDaoImp implements UsuarioDao{
         Usuario usuario = entityManager.find(Usuario.class, id);
         entityManager.remove(usuario);
         //Borra todos los libros usuario que tuviera permiso de visualizar
-        String sql = "DELETE FROM LibroUsuario WHERE id_usuario = :idLibro";
+        String sql = "DELETE FROM LibroUsuario WHERE id_usuario = :idUsuario";
         entityManager.createQuery(sql)
-                .setParameter("idLibro", id)
+                .setParameter("idUsuario", id)
                 .executeUpdate();
     }
 
