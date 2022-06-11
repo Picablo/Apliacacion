@@ -6,6 +6,14 @@ $(document).ready(function() {
 let datos = {};
 let comprobacion;
 
+function getHeaders(){
+    return {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.token
+    };
+}
+
 async function registrarUsuario(){
 
     datos.nombre = document.getElementById("txtNombre").value
@@ -34,10 +42,7 @@ async function registrarUsuario(){
         if(sessionStorage.getItem('usuario')==null){
             const request = await fetch('api/usuarios', {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                headers: getHeaders(),
                 body: JSON.stringify(datos)
             });
             swal({
@@ -49,11 +54,8 @@ async function registrarUsuario(){
         }else{
             const request = await fetch('api/usuario/'+usuario.id, {
                 method: 'PUT',
-                headers: {
-                   'Accept': 'application/json',
-                   'Content-Type': 'application/json'
-                },
-            body: JSON.stringify(datos)
+                headers: getHeaders(),
+                body: JSON.stringify(datos)
             });
             sessionStorage.clear();
             swal({
@@ -68,27 +70,13 @@ async function registrarUsuario(){
     }
 }
 
-function getHeaders(){
-    return {
-        'Accept': 'application/json',
-        //'Content-Type': 'application/json',
-        'Authorization': localStorage.token
-    };
-}
-
-
-
-
 async function comprobarusuario(){
     //Si el usuario es editado trae los datos
     if(sessionStorage.getItem('usuario')!=null){
 
         request = await fetch('api/usuarios/'+window.sessionStorage.getItem('usuario'), {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: getHeaders()
         });
 
         usuario = await request.json()

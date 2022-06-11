@@ -19,7 +19,7 @@ let secciones;
 let categorias;
 let cambio = true;
 let comprobacion;
-//let ficheroFinal;
+
 
 button.addEventListener("click", (e) => {
     input.click();
@@ -55,7 +55,7 @@ dropArea.addEventListener("drop", (e) => {
 function getHeaders(){
     return {
         'Accept': 'application/json',
-        //'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': localStorage.token
     };
 }
@@ -129,9 +129,12 @@ async function uploadFile(file){
     try{
         const request = await fetch('api/upload', {
             method: 'POST',
-            headers: getHeaders(),
+            headers: {
+                    'Authorization': localStorage.token
+            },
             body: formData
         });
+
         //Datos que son devueltos de Spring Boot despues de subir el fichero
         const requestText = await request.text();
 
@@ -190,41 +193,38 @@ async function registrarLibro(){
 
     comprobarDatos();
     if(comprobacion){
+
+        let caso = "";
+
         if(sessionStorage.getItem('libro')==null){
             const request = await fetch('api/libros', {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                headers: getHeaders(),
                 body: JSON.stringify(datos)
             });
-            swal({
-                title: "Exito",
-                text: "El libro fue CREADO",
-                icon: "success",
-                button: "ok",
-            });
+
+            caso = "El libro fue CREADO";
+
         }else{
             const request = await fetch('api/libro/'+libro.id, {
                 method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                headers: getHeaders(),
                 body: JSON.stringify(datos)
             });
 
+            caso = "El libro fue MODIFICADO";
             sessionStorage.clear();
-            swal({
-                title: "Exito",
-                text: "El libro fue MODIFICADO",
-                icon: "success",
-                button: "ok",
-            });
         }
 
-        window.location.href = 'libros.html';
+        swal({
+            title: "Exito",
+            text: caso,
+            icon: "success",
+            button: "ok",
+        }).then((value) => {
+            window.location.href = 'libros.html';
+        });
+
     }
 }
 
@@ -235,10 +235,7 @@ async function comprobarLibro(){
 
         request = await fetch('api/libro/'+window.sessionStorage.getItem('libro'), {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: getHeaders()
         });
 
         libro = await request.json()
@@ -268,28 +265,19 @@ async function dataList(){
 
     request = await fetch('api/libros/autores', {
         method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        headers: getHeaders()
     });
     autores = await request.json();
 
     request = await fetch('api/libros/secciones', {
         method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        headers: getHeaders()
     });
     secciones = await request.json();
 
     request = await fetch('api/libros/categorias', {
         method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        headers: getHeaders()
     });
     categorias = await request.json();
 
@@ -309,10 +297,7 @@ async function dataList(){
 async function tableUserAccess(){
     usuarios = await fetch('api/usuarios/usuid', {
         method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        headers: getHeaders()
     });
 
     userID = await usuarios.json();

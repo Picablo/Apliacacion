@@ -6,6 +6,9 @@ import com.aplicacion.aplicacion.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class AuthController {
 
@@ -22,8 +25,8 @@ public class AuthController {
         Usuario usuarioLogeado = usuarioDao.obtenerUsuarioPorCredenciales(usuario);
 
         if(usuarioLogeado != null){
-            String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogeado.getId()), "TOKEN");
-
+            //Convertimos el token en ID-PERMISO
+            String tokenJwt =jwtUtil.create((usuarioLogeado.getId())+"-"+(usuarioLogeado.getTipo()), "TOKEN");
             return tokenJwt;
         }
         return "FAIL";
@@ -31,6 +34,8 @@ public class AuthController {
 
     @RequestMapping(value = "api/jwt/{token}", method = RequestMethod.GET)
     public String id(@PathVariable String token){
-        return jwtUtil.getKey(token);
+        //Rompemos el token y devolvemos solo el ID
+        String[] parts = jwtUtil.getKey(token).split("-");
+        return parts[0];
     }
 }

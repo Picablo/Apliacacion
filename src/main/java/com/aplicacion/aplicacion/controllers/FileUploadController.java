@@ -1,9 +1,8 @@
 package com.aplicacion.aplicacion.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.aplicacion.aplicacion.utils.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -18,15 +17,26 @@ import java.util.Map;
 @RestController
 public class FileUploadController {
 
+    @Autowired
+    private JWTUtil jwtUtil;
+
+    private boolean validarAdmin(String token) {
+        String[] usuarioAdmin = jwtUtil.getKey(token).split("-");
+        return Integer.parseInt(usuarioAdmin[1]) == 1;
+    }
+
     @RequestMapping(value = "api/upload", method = RequestMethod.POST)
-    public Map<String, String> uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) throws IOException{
+    public Map<String, String> uploadFile(//@RequestHeader(value = "Authorization") String token,
+                                          @RequestParam("file") MultipartFile file, RedirectAttributes attributes) throws IOException{
+
+        //if (!validarAdmin(token)) { return null;}
 
         if(file == null || file.isEmpty()){
             return null;
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("C:\\Users\\pgamez_eusa\\Desktop\\Aplicacion\\src\\main\\resources\\static\\ficheros\\libros");
+        builder.append("C:\\Users\\CASA\\Desktop\\Aplicacion\\src\\main\\resources\\static\\ficheros\\libros");
         builder.append(File.separator);
         builder.append(file.getOriginalFilename());
 
