@@ -1,8 +1,6 @@
 // Call the dataTables jQuery plugin
-
 $(document).ready(function() {
     cargarLibros();
-  //$('#libros').DataTable();
 });
 
 function getHeaders(){
@@ -15,12 +13,9 @@ function getHeaders(){
 
 async function cargarLibros(){
 
-    let request = await fetch('api/jwt/'+ localStorage.getItem("token"), {
+    let request = await fetch('api/jwt/id', {
        method: 'GET',
-       headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            },
+       headers: getHeaders()
    });
    const id = await request.json();
 
@@ -34,7 +29,6 @@ async function cargarLibros(){
 
     let listadoHtml = '';
     for (let libro of libros){
-        //let botonEliminar = '<a href="#" onclick="eliminarUsuario('+usuario.id+')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
 
         if(libro.fecha!=null){
             libro.fecha = libro.fecha.substr(0,10);
@@ -49,18 +43,3 @@ async function cargarLibros(){
     $('#libros').DataTable();
 
 }
-
-/*
-async function eliminarUsuario(id){
-
-    if(!confirm('¿Desea eliminar este usuario?')){
-        return;
-    }
-
-    const request = await fetch('api/usuarios/' +id, {
-        method: 'DELETE',
-        headers: getHeaders()
-    });
-
-    location.reload()
-}*/

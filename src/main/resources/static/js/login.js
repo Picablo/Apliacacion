@@ -5,6 +5,10 @@ $(document).ready(function() {
 
 async function iniciarSesion(){
 
+    //Lo primero sera borra si hubiera culquier token no cerrado
+    sessionStorage.clear();
+    localStorage.clear();
+
     let datos = {};
     datos.mail = document.getElementById("txtEmail").value
     datos.password = document.getElementById("txtPassword").value

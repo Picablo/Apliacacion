@@ -1,9 +1,6 @@
 package com.aplicacion.aplicacion.dao;
 
 import com.aplicacion.aplicacion.models.Libro;
-//import de.mkammerer.argon2.Argon2;
-//import de.mkammerer.argon2.Argon2Factory;
-import com.aplicacion.aplicacion.models.LibroUsuario;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +10,6 @@ import javax.persistence.Query;
 import java.util.*;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.Long.parseLong;
 
 @Repository
 @Transactional
@@ -169,10 +165,7 @@ public class LibroDaoImp implements LibroDao {
     @Override
     public Libro parseRequestBodyLibro(Map<String, Object> libro){
         Libro cLibro = new Libro();
-        //El ide no se modifica porque es automatico cuando se genere y unico
-        /*if(libro.getId()!=null) {
-            cLibro.setId(parseInt(libro.getId()));
-        }*/
+
         if(libro.get("tipo")!=null) {
             cLibro.setTipo(libro.get("tipo").toString());
         }
@@ -182,12 +175,11 @@ public class LibroDaoImp implements LibroDao {
         if(libro.get("descripcion").toString()!=null) {
             cLibro.setDescripcion(libro.get("descripcion").toString());
         }
-       // if(libro.getFecha()!=null) {
+
         //La fecha se actualiza siempre que se hace algo
-            Date fecha = new Date();
-            //LocalDate date = LocalDate.parse(libro.getFecha());
-            cLibro.setFecha(fecha);
-        //}
+        Date fecha = new Date();
+        cLibro.setFecha(fecha);
+
         if(libro.get("autor").toString()!=null) {
             cLibro.setAutor(libro.get("autor").toString());
         }
@@ -207,7 +199,7 @@ public class LibroDaoImp implements LibroDao {
             cLibro.setIsbn(Long.parseLong(libro.get("isbn").toString()));
         }
 
-        //Por si se habilita el catador
+        //Por si se habilita el creador
         /*if(libro.get("creador").toString()!=null) {
             cLibro.setCreador(Integer.parseInt(libro.get("creador").toString()));
         }*/

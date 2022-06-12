@@ -18,6 +18,10 @@ public class AuthController {
     @Autowired
     private JWTUtil jwtUtil;
 
+    private boolean validarToken(String token) {
+        String usuarioId = jwtUtil.getKey(token);
+        return usuarioId != null;
+    }
 
     @RequestMapping(value = "api/jwt/login", method = RequestMethod.POST)
     public String login(@RequestBody Usuario usuario){
@@ -32,10 +36,18 @@ public class AuthController {
         return "FAIL";
     }
 
-    @RequestMapping(value = "api/jwt/{token}", method = RequestMethod.GET)
-    public String id(@PathVariable String token){
+    @RequestMapping(value = "api/jwt/id", method = RequestMethod.GET)
+    public String id(@RequestHeader(value = "Authorization") String token){
         //Rompemos el token y devolvemos solo el ID
         String[] parts = jwtUtil.getKey(token).split("-");
         return parts[0];
     }
+
+    @RequestMapping(value = "api/jwt/menuOption", method = RequestMethod.GET)
+    private String opcionMenu(@RequestHeader(value = "Authorization") String token) {
+        String[] usuarioTipo = jwtUtil.getKey(token).split("-");
+        return usuarioTipo[1];
+    }
+
+
 }

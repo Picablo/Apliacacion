@@ -20,11 +20,6 @@ public class UsuarioController {
     @Autowired
     private JWTUtil jwtUtil;
 
-    private boolean validarToken(String token) {
-        String usuarioId = jwtUtil.getKey(token);
-        return usuarioId != null;
-    }
-
     private boolean validarAdmin(String token) {
         String[] usuarioAdmin = jwtUtil.getKey(token).split("-");
         return Integer.parseInt(usuarioAdmin[1]) == 1;

@@ -95,9 +95,6 @@ function proccesFile(file){
                         </div>
                     </div>
                 `;
-
-                //const html = document.querySelector("#preview").innerHTML;
-                //document.querySelector("#preview").innerHTML = image + html;
             });
 
             fileReader.readAsDataURL(file);
