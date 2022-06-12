@@ -25,7 +25,7 @@ async function iniciarSesion(){
     const respuesta = await request.text();
     if (respuesta != 'FAIL'){
         localStorage.token = respuesta;
-        window.location.href = 'usuarios.html'
+        window.location.href = 'libros.html'
     }else{
         swal({
             title: "Aviso!!",

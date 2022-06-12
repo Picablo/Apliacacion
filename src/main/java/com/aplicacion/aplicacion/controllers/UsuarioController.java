@@ -42,9 +42,7 @@ public class UsuarioController {
 
 
     @RequestMapping(value = "api/usuarios", method = RequestMethod.POST)
-    public void registrarUsuarios(@RequestHeader(value = "Authorization") String token,
-                                  @RequestBody Usuario usuario){
-        if (!validarAdmin(token)) {return;}
+    public void registrarUsuarios(@RequestBody Usuario usuario){
 
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String hash = argon2.hash(1,1024,1, usuario.getPassword());

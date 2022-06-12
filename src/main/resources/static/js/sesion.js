@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    comprobarInicio();
 });
 
 let imagenSesion;
@@ -12,46 +13,49 @@ function getHeaders(){
     };
 }
 
-if(localStorage.token == null){
-    /*El token no existe*/
-    let html = '<a class="dropdown-item" href="login.html"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Iniciar Sesión</a>';
-    document.getElementById("divUsuLogin").innerHTML = html;
-    imagenSesion = "img/undraw_withoutlogin.svg";
-    nombreSesion = "";
-    var URLactual = window.location;
-
-    if(document.getElementById("menuOption") != null){
-        document.getElementById("menuOption").innerHTML = "";
-    }
-
-    if(URLactual != "http://localhost:8080/login.html"){
-/*        swal({
-            title: "Advertencia",
-            text: "Necesita primero iniciar Sesión\nantes de poder usar la aplicación",
-            icon: "warning",
-            button: "ok",
-        });*/
-        window.location.href = 'login.html';
-    }
-
-}else{
-    imagenSesion = "img/undraw_profile_1.svg";
-    nombreSesion = "Usuario Logueado";
-}
-
-if(sessionStorage.menuOption == null){
-    menuOption();
-}
-
-
-document.getElementById("imgSesion").src = imagenSesion;
-document.getElementById("spanName").innerHTML= nombreSesion;
-document.getElementById("menuOption").innerHTML = sessionStorage.menuOption;
-
 function cerrarSesion(){
     sessionStorage.clear();
     localStorage.clear();
     window.location.href = 'login.html';
+}
+
+function comprobarInicio(){
+    if(localStorage.token == null){
+        /*El token no existe*/
+        let html = '<a class="dropdown-item" href="login.html"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Iniciar Sesión</a>';
+        document.getElementById("divUsuLogin").innerHTML = html;
+        imagenSesion = "img/undraw_withoutlogin.svg";
+        nombreSesion = "";
+
+        var urlActual = window.location;
+
+        if(!(urlActual == "http://localhost:8080/login.html" || urlActual == "http://localhost:8080/registrarse.html")){
+            swal({
+                title: "Advertencia",
+                text: "Necesita primero iniciar Sesión\nantes de poder usar la aplicación",
+                icon: "warning",
+                button: "ok",
+            }).then((value) => {
+                window.location.href = 'login.html';
+            });
+        }
+
+    }else{
+        imagenSesion = "img/undraw_profile_1.svg";
+        nombreSesion = "Usuario Logueado";
+    }
+
+    if(sessionStorage.menuOption == null || sessionStorage.menuOption == ""){
+        menuOption();
+    }
+
+    document.getElementById("imgSesion").src = imagenSesion;
+    document.getElementById("spanName").innerHTML= nombreSesion;
+    if(sessionStorage.menuOption == null){
+        document.getElementById("menuOption").innerHTML = "";
+    }else{
+        document.getElementById("menuOption").innerHTML = sessionStorage.menuOption;
+    }
 }
 
 async function menuOption(){

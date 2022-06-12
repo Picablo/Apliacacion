@@ -59,6 +59,6 @@ async function registrarUsuario(){
         button: "ok",
     })
     .then((value) => {
-      window.location.href = 'principal.html';
+        window.location.href = 'login.html';
     });
 }
